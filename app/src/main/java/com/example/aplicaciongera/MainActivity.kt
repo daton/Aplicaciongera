@@ -12,10 +12,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         getSupportActionBar()?.hide()
         //Vamos a manejar el evento de botón por su ID.
+
         ingresar.setOnClickListener {
             var i=Intent(this,MenuActivity::class.java)
 
             TareaGuardarCliente(this,this).execute(null,null,null).get()
+
+
             startActivity(i)
 
         }

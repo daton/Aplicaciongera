@@ -5,14 +5,14 @@ import android.os.AsyncTask
 import android.widget.Toast
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 class TareaGuardarCliente(private var ctx: Context?,
                           private var activity: MainActivity?)
     : AsyncTask<Void, Void, Void>() {
 
     var estatus=Estatus()
-
+    var cliente=Cliente()
     override fun onPostExecute(result: Void?) {
 
         //Invocamos nuestra vistaa del MainActivity
@@ -25,6 +25,12 @@ class TareaGuardarCliente(private var ctx: Context?,
 
     override fun onPreExecute() {
         super.onPreExecute()
+        //Generamos un usuario
+        cliente.ident=   activity?.txtident?.text.toString().toInt()
+
+        cliente.nombre=  activity?.txtnombre?.text.toString()
+
+
     }
 
     override fun doInBackground(vararg p0: Void?): Void? {
@@ -35,11 +41,10 @@ class TareaGuardarCliente(private var ctx: Context?,
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build()
         var servicioCliente=       retrofit.create(ClienteService::class.java)
-            //Generamos un usuario
-            var cliente=Cliente()
-              cliente.ident=233
+
+
             cliente.mail="rapid@gmail.com"
-            cliente.nombre="Tribilin"
+
             var direccion=Direccion()
             direccion.calle="amargura"
             direccion.cp=777
